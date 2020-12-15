@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+h1 {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+  font-family: "Nunito", sans-serif;
+}
 
 .App-logo {
   height: 40vmin;
