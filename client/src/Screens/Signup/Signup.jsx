@@ -5,6 +5,7 @@ import "./Signup.css";
 export default function Signup() {
   return (
     <Form className="signup-ctn">
+      <h1 className="su-title">Sign Up Here!</h1>
       <Form.Row className="un-pw-ctn">
         <Form.Group as={Col} controlId="">
           <Form.Label>Username</Form.Label>

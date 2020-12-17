@@ -1,11 +1,9 @@
 .footer-ctn {
   background-color: #e9ecef;
-  position: relative;
+  color: rgb(0, 0, 0);
+  position: absolute;
   bottom: 0;
   width: 100%;
-  height: 130px;
-  color: rgb(0, 0, 0);
-  margin-top: 200px;
 }
 .list-unstyled {
   color: rgb(0, 0, 0);
@@ -50,4 +48,33 @@
   height: 25px;
   margin: 5px;
   padding: 5px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 25px;
+  font-family: "Lato", sans-serif;
+}
+.home-link {
+  text-decoration: none;
+  color: black;
+}
+.home-link:hover {
+  text-decoration: none;
+  color: black;
+}
+.profile-pic-header {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 4%;
+}
+.toggle-drop {
+  outline: 0;
+}
+.toggle-drop:hover {
+  background-color: lightblue;
 }

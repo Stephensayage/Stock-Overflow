@@ -17,7 +17,9 @@ export default function Landingpage() {
       <div className="sign-in-ctn">
         <p>Already have an account?</p>
         <p>
-          <Button variant="primary">Sign In</Button>
+          <Link to="/signin">
+            <Button variant="primary">Sign In</Button>
+          </Link>
         </p>
       </div>
     </Jumbotron>
