@@ -1,5 +1,4 @@
 import React from "react";
-import { Jumbotron, Button, Accordion, Card } from "react-bootstrap";
 import "./ProfilePage.css";
 
 import Profilecard from "../../Components/Shared/Profilecard/Profilecard";
