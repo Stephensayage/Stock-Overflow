@@ -4,11 +4,11 @@
   margin: 0 auto;
 }
 .create-post-input {
-  width: 80%;
+  width: 70% !important;
   margin: 0 auto;
   border: 1px solid rgb(154, 154, 154);
   box-shadow: 0px 1px 2px 1px #c8cacb;
 }
 .post-btn {
-  margin: 2% 70% 0 0;
+  margin: 2% 60% 0 0;
 }

@@ -20,7 +20,9 @@ export default function Profilecard(props) {
           <br />
           <span>{props.currentUser.email}</span>
           <br />
-          <span>Member since - {displayDate}</span>
+          <span>
+            <strong>Member since:</strong> {displayDate}
+          </span>
         </div>
       </Jumbotron>
     </div>

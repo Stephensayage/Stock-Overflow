@@ -13,24 +13,17 @@ export default function UserCreatePost(props) {
     setPostInput(value);
   };
 
-  const handleSubmit = async () => {
-    try {
-      await createPost({
-        user_id: props.currentUser.id,
-        content: postInput.content,
-      });
-      props.history.push("/profile");
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPost = await createPost({
+      user_id: props.currentUser.id,
+      content: postInput,
+    });
   };
 
   return (
     <div className="create-post-ctn">
-      <Form.Group
-        controlId="exampleForm.ControlTextarea1"
-        onSubmit={handleSubmit}
-      >
+      <Form onSubmit={handleSubmit}>
         <Form.Control
           onChange={handleChange}
           value={postInput.content}
@@ -40,10 +33,10 @@ export default function UserCreatePost(props) {
           rows={3}
           placeholder="What are you thinking?"
         />
-        <Button variant="info" className="post-btn">
+        <Button type="submit" variant="info" className="post-btn">
           Post
         </Button>
-      </Form.Group>
+      </Form>
       <Form.Label>{props.currentUser.username}'s Feed</Form.Label>
     </div>
   );
