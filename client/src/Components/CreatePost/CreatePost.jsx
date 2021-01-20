@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import "./UserCreatePost.css";
+import "./CreatePost.css";
 import { createPost } from "../../services/posts";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/user_context";
 
 export default function UserCreatePost(props) {
+  const { user } = useContext(UserContext);
+
   const [postInput, setPostInput] = useState({
     content: "",
   });
@@ -16,7 +20,7 @@ export default function UserCreatePost(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = await createPost({
-      user_id: props.currentUser.id,
+      user_id: user.id,
       content: postInput,
     });
   };
@@ -37,7 +41,6 @@ export default function UserCreatePost(props) {
           Post
         </Button>
       </Form>
-      <Form.Label>{props.currentUser.username}'s Feed</Form.Label>
     </div>
   );
 }

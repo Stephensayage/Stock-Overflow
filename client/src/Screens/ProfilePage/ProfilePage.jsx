@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from "react";
-import "./ProfilePage.css";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../Contexts/user_context";
 import { getPosts } from "../../services/posts";
 
-import Profilecard from "../../Components/Profilecard/Profilecard";
-import UserCreatePost from "../../Components/UserCreatePost/UserCreatePost";
-import UserFeed from "../../Components/UserFeed/UserFeed";
+import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import ProfileFeed from "../../Components/ProfileFeed/ProfileFeed";
+import CreatePost from "../../Components/CreatePost/CreatePost";
 
-export default function ProfilePage(props) {
-  const [userPosts, setUserPosts] = useState();
+export default function ProfilePage() {
+  const { user } = useContext(UserContext);
+  const [posts, setPosts] = useState(null);
 
-  const fetchPosts = async () => {
-    const allUserPosts = await getPosts(props.currentUser.id);
-    setUserPosts(allUserPosts);
-  };
   useEffect(() => {
     fetchPosts();
   }, []);
 
+  const fetchPosts = async () => {
+    const res = await getPosts();
+    setPosts(res);
+  };
+
   return (
     <div>
-      <h1>Profile Page</h1>
-      <Profilecard currentUser={props.currentUser} />
-      <UserCreatePost currentUser={props.currentUser} />
-      <UserFeed currentUser={props.currentUser} userPosts={userPosts} />
+      {user && posts && (
+        <>
+          <ProfileCard user={user} />
+          <CreatePost />
+          <ProfileFeed userPosts={posts} user={user} />
+        </>
+      )}
     </div>
   );
 }

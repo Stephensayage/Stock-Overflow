@@ -1,10 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Button, Col } from "react-bootstrap";
+import { useHistory } from "react-router";
+import { UserContext } from "../../Contexts/user_context";
 import { loginUser } from "../../services/auth";
 import "./Signin.css";
 
 export default function Signin(props) {
+  const { setUser } = useContext(UserContext);
+  const { push } = useHistory();
+
   const [signInInput, setSignInInput] = useState({
     username: "",
     password: "",
@@ -20,10 +25,13 @@ export default function Signin(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = await loginUser(signInInput);
-    console.log(userData);
-    props.setCurrentUser(userData);
-    props.history.push("/profile");
+    try {
+      const response = await loginUser(signInInput);
+      setUser(response);
+      push("/profile");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

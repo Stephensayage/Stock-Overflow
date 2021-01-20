@@ -1,0 +1,26 @@
+.feed-ctn {
+  width: 90%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(20, 20, 20, 0.1);
+}
+.feed-title {
+  margin-left: 5%;
+}
+
+.post-ctn {
+  position: relative;
+  max-width: 60rem;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 5rem auto;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.feed-pic {
+  position: absolute;
+  width: 25%;
+  border-radius: 50%;
+  top: 0;
+  left: 1rem;
+}

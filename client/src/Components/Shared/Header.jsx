@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "react-router-dom/Link";
 import { removeToken } from "../../services/auth";
 
 import { EmojiSmileFill } from "react-bootstrap-icons";
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { UserContext } from "../../Contexts/user_context";
 
 export default function Header(props) {
   const history = useHistory();
+  const { user, setUser } = useContext(UserContext);
 
   const handleLogout = () => {
-    props.setCurrentUser(null);
+    setUser(null);
     localStorage.removeItem("authToken");
     removeToken();
     history.push("/");
@@ -18,14 +20,21 @@ export default function Header(props) {
 
   return (
     <div className="header">
-      <Link to="/" className="home-link">
-        <h3>StockOverflow</h3>
-      </Link>
-      {props.currentUser ? (
+      {user ? (
+        <Link to="/homepage" className="home-link">
+          <h3>StockOverflow</h3>
+        </Link>
+      ) : (
+        <Link to="/" className="home-link">
+          <h3>StockOverflow</h3>
+        </Link>
+      )}
+
+      {user ? (
         <>
           <Dropdown as={ButtonGroup}>
             <img
-              src={props.currentUser.image}
+              src={user.image}
               alt="profile-pic"
               className="profile-pic-header"
             />

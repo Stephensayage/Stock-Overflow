@@ -1,60 +1,55 @@
 import { Route } from "react-router";
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { verifyUser } from "./services/auth";
+import { getPosts } from "./services/posts";
+import { getUsers } from "./services/users";
 
 import Footer from "./Components/Shared/Footer";
-// import Homepage from "./Screens/Homepage/Homepage";
 import Landingpage from "./Screens/Landingpage/Landingpage";
 import Signup from "./Screens/Signup/Signup";
 import Signin from "./Screens/Signin/Signin";
-import ProfilePage from "./Screens/ProfilePage/ProfilePage";
 import Header from "./Components/Shared/Header";
+import { UserContext } from "./Contexts/user_context";
+import ProfilePage from "./Screens/ProfilePage/ProfilePage";
+import Homepage from "./Screens/Homepage/Homepage";
+import { Form } from "react-bootstrap";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const { user } = useContext(UserContext);
+
+  const [allPosts, setAllPosts] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
-    handleVerify();
-  }, []);
+    showPosts();
+    showUsers();
+  }, [user]);
 
-  const handleVerify = async () => {
-    const currentUserData = await verifyUser();
-    setCurrentUser(currentUserData);
+  const showUsers = async () => {
+    const fetchUsers = await getUsers();
+    setAllUsers(fetchUsers);
+  };
+
+  const showPosts = async () => {
+    const fetchPosts = await getPosts();
+    setAllPosts(fetchPosts.reverse());
   };
 
   return (
     <div className="App">
-      <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Header />
+      <Route path="/" exact render={(props) => <Landingpage />} />
+      <Route path="/signup" render={(props) => <Signup {...props} />} />
+      <Route path="/signin" render={(props) => <Signin {...props} />} />
+      <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
       <Route
-        path="/"
-        exact
-        render={(props) => <Landingpage currentUser={currentUser} />}
-      />
-      <Route
-        path="/signup"
+        path="/homepage"
         render={(props) => (
-          <Signup
-            setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
-            {...props}
-          />
+          <Homepage allUsers={allUsers} allPosts={allPosts} {...props} />
         )}
       />
-      <Route
-        path="/signin"
-        render={(props) => (
-          <Signin
-            setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
-            {...props}
-          />
-        )}
-      />
-      <Route
-        path="/profile"
-        render={(props) => <ProfilePage currentUser={currentUser} {...props} />}
-      />
+
       {/* <Footer /> */}
     </div>
   );

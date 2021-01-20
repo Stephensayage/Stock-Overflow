@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useHistory } from "react";
 import { Form, Button, Col } from "react-bootstrap";
+import { UserContext } from "../../Contexts/user_context";
 import { registerUser } from "../../services/auth";
 import "./Signup.css";
 
 export default function Signup(props) {
+  const { setUser } = useContext(UserContext);
+
   const [signUpInput, setSignUpInput] = useState({
     username: "",
     email: "",
@@ -23,9 +26,13 @@ export default function Signup(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = await registerUser(signUpInput);
-    props.setCurrentUser(newUser);
-    props.history.push("/profile");
+    try {
+      const newUser = await registerUser(signUpInput);
+      setUser(newUser);
+      props.history.push("/profile");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
