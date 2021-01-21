@@ -1,6 +1,7 @@
 import { Route } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
-import "./App.css";
+import "./App.scss";
+import "./Components/Shared/Shared.scss";
 import { verifyUser } from "./services/auth";
 import { getPosts } from "./services/posts";
 import { getUsers } from "./services/users";
@@ -14,6 +15,7 @@ import { UserContext } from "./Contexts/user_context";
 import ProfilePage from "./Screens/ProfilePage/ProfilePage";
 import Homepage from "./Screens/Homepage/Homepage";
 import { Form } from "react-bootstrap";
+import Sidebar from "./Components/Shared/Sidebar";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -39,17 +41,19 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Route path="/" exact render={(props) => <Landingpage />} />
-      <Route path="/signup" render={(props) => <Signup {...props} />} />
-      <Route path="/signin" render={(props) => <Signin {...props} />} />
-      <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
-      <Route
-        path="/homepage"
-        render={(props) => (
-          <Homepage allUsers={allUsers} allPosts={allPosts} {...props} />
-        )}
-      />
-
+      <div className="app-ctn">
+        <Sidebar />
+        <Route path="/" exact render={(props) => <Landingpage />} />
+        <Route path="/signup" render={(props) => <Signup {...props} />} />
+        <Route path="/signin" render={(props) => <Signin {...props} />} />
+        <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
+        <Route
+          path="/homepage"
+          render={(props) => (
+            <Homepage allUsers={allUsers} allPosts={allPosts} {...props} />
+          )}
+        />
+      </div>
       {/* <Footer /> */}
     </div>
   );
