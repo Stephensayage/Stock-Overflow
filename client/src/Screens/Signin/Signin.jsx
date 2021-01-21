@@ -4,7 +4,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { UserContext } from "../../Contexts/user_context";
 import { loginUser } from "../../services/auth";
-import "./Signin.css";
+import "./Signin.scss";
 
 export default function Signin(props) {
   const { setUser } = useContext(UserContext);
@@ -41,6 +41,7 @@ export default function Signin(props) {
         <Form.Group as={Col} controlId="">
           <Form.Label>Username</Form.Label>
           <Form.Control
+            className="sing-in-input"
             type="text"
             placeholder="Username"
             name="username"
@@ -52,6 +53,7 @@ export default function Signin(props) {
         <Form.Group as={Col} controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            className="sing-in-input"
             type="password"
             placeholder="Password"
             name="password"

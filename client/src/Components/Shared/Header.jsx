@@ -30,7 +30,7 @@ export default function Header(props) {
           </Link>
         ) : (
           <Link to="/" className="home-link">
-            <h3>StockOverflow</h3>
+            <h3 className="header-title">StockOverflow</h3>
           </Link>
         )}
 

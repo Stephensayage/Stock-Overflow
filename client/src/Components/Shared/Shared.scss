@@ -61,9 +61,9 @@
   justify-content: space-between;
   padding: 25px;
   font-family: "Lato", sans-serif;
-  background-color: $color-dark;
+  background-color: $color-grey-dark-1;
   &-title {
-    color: $color-primary;
+    color: $color-light;
   }
 }
 .search {
@@ -113,7 +113,7 @@
   outline: 0;
 }
 .toggle-drop:hover {
-  background-color: $color-primary;
+  background-color: $color-splash;
 }
 
 // Sidebar
@@ -122,9 +122,82 @@
   flex: 1;
 }
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &-ctn {
-    flex: 0 0 18%;
+    flex: 0 0 10%;
     background-color: $color-grey-dark-1;
-    color: $color-splash;
+    color: $color-light;
   }
+
+  &-nav {
+  }
+
+  &-ul {
+    list-style: none;
+    padding-left: 0 !important;
+    font-size: 1.2rem;
+    margin-top: 3rem;
+    text-align: left;
+  }
+  &-li {
+    position: relative;
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+  &-li:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: $color-primary;
+    transform: scaleY(0);
+    transition: transform 0.3s, width 0.5s 0.3s, background-color 0.1s;
+  }
+
+  &-li:hover::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &-li:active::before {
+    background-color: $color-primary-active;
+  }
+
+  &-link:link,
+  &-link:visited {
+    color: $color-light;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    z-index: 10;
+  }
+  &-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+    filter: invert(35%) sepia(85%) saturate(493%) hue-rotate(323deg)
+      brightness(104%) contrast(87%);
+  }
+}
+// legal
+.legal {
+  font-size: 0.6rem;
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 50%;
+}
+
+//app container
+.app-ctn {
+  background-color: $color-grey-3;
 }
