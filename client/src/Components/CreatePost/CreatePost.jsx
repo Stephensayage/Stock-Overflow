@@ -35,7 +35,7 @@ export default function UserCreatePost(props) {
           className="create-post-input"
           as="textarea"
           rows={3}
-          placeholder="What are you thinking?"
+          placeholder="Share what you are thinking..."
         />
         <Button type="submit" variant="info" className="post-btn">
           Post
